@@ -1,4 +1,4 @@
-# The Great Convergence — Tableau Public data story
+# Global Health Convergence | A Tableau data story
 
 A six-point Tableau story on the Gapminder dataset: global life expectancy
 converged dramatically (1% -> 61% of humanity in 70+ life-expectancy
