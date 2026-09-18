@@ -1,0 +1,154 @@
+<?xml version='1.0' encoding='utf-8'?>
+<workbook source-platform="win" version="18.1" xmlns:user="http://www.tableausoftware.com/xml/user">
+  <preferences />
+  <datasources>
+    <datasource caption="01 Population above 70 years" inline="true" name="story0" version="18.1">
+      <connection class="textscan" directory="outputs" filename="threshold_share.csv" separator="," header="yes">
+        <relation name="threshold_share.csv" table="[threshold_share.csv]" type="table" />
+      </connection>
+      <column caption="Year" datatype="string" name="[label]" role="dimension" type="nominal" />
+      <column caption="Percent of panel population" datatype="real" name="[value]" role="measure" type="quantitative" />
+    </datasource>
+    <datasource caption="02 Median life expectancy" inline="true" name="story1" version="18.1">
+      <connection class="textscan" directory="outputs" filename="median_life.csv" separator="," header="yes">
+        <relation name="median_life.csv" table="[median_life.csv]" type="table" />
+      </connection>
+      <column caption="Year" datatype="string" name="[label]" role="dimension" type="nominal" />
+      <column caption="Years" datatype="real" name="[value]" role="measure" type="quantitative" />
+    </datasource>
+    <datasource caption="03 Largest gains 1952 to 2007" inline="true" name="story2" version="18.1">
+      <connection class="textscan" directory="outputs" filename="largest_gains.csv" separator="," header="yes">
+        <relation name="largest_gains.csv" table="[largest_gains.csv]" type="table" />
+      </connection>
+      <column caption="Country" datatype="string" name="[label]" role="dimension" type="nominal" />
+      <column caption="Gain in years" datatype="real" name="[value]" role="measure" type="quantitative" />
+    </datasource>
+    <datasource caption="04 Largest declines 1987 to 2007" inline="true" name="story3" version="18.1">
+      <connection class="textscan" directory="outputs" filename="largest_declines.csv" separator="," header="yes">
+        <relation name="largest_declines.csv" table="[largest_declines.csv]" type="table" />
+      </connection>
+      <column caption="Country" datatype="string" name="[label]" role="dimension" type="nominal" />
+      <column caption="Change in years" datatype="real" name="[value]" role="measure" type="quantitative" />
+    </datasource>
+  </datasources>
+  <worksheets>
+    <worksheet name="01 Population above 70 years">
+      <layout-options>
+        <title />
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption="01 Population above 70 years" name="story0" />
+          </datasources>
+          <datasource-dependencies datasource="story0">
+            <column caption="Year" datatype="string" name="[label]" role="dimension" type="nominal" />
+            <column caption="Percent of panel population" datatype="real" name="[value]" role="measure" type="quantitative" />
+            <column-instance column="[label]" derivation="None" name="[none:label:nk]" pivot="key" type="nominal" />
+            <column-instance column="[value]" derivation="Sum" name="[sum:value:qk]" pivot="key" type="quantitative" />
+          </datasource-dependencies>
+          <aggregation value="true" />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option="selection-relaxation-allow">
+            <view breakdown="auto" />
+            <mark class="Line" />
+          </pane>
+        </panes>
+        <rows>[story0].[sum:value:qk]</rows>
+        <cols>[story0].[none:label:nk]</cols>
+      </table>
+    </worksheet>
+    <worksheet name="02 Median life expectancy">
+      <layout-options>
+        <title />
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption="02 Median life expectancy" name="story1" />
+          </datasources>
+          <datasource-dependencies datasource="story1">
+            <column caption="Year" datatype="string" name="[label]" role="dimension" type="nominal" />
+            <column caption="Years" datatype="real" name="[value]" role="measure" type="quantitative" />
+            <column-instance column="[label]" derivation="None" name="[none:label:nk]" pivot="key" type="nominal" />
+            <column-instance column="[value]" derivation="Sum" name="[sum:value:qk]" pivot="key" type="quantitative" />
+          </datasource-dependencies>
+          <aggregation value="true" />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option="selection-relaxation-allow">
+            <view breakdown="auto" />
+            <mark class="Line" />
+          </pane>
+        </panes>
+        <rows>[story1].[sum:value:qk]</rows>
+        <cols>[story1].[none:label:nk]</cols>
+      </table>
+    </worksheet>
+    <worksheet name="03 Largest gains 1952 to 2007">
+      <layout-options>
+        <title />
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption="03 Largest gains 1952 to 2007" name="story2" />
+          </datasources>
+          <datasource-dependencies datasource="story2">
+            <column caption="Country" datatype="string" name="[label]" role="dimension" type="nominal" />
+            <column caption="Gain in years" datatype="real" name="[value]" role="measure" type="quantitative" />
+            <column-instance column="[label]" derivation="None" name="[none:label:nk]" pivot="key" type="nominal" />
+            <column-instance column="[value]" derivation="Sum" name="[sum:value:qk]" pivot="key" type="quantitative" />
+          </datasource-dependencies>
+          <aggregation value="true" />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option="selection-relaxation-allow">
+            <view breakdown="auto" />
+            <mark class="Bar" />
+          </pane>
+        </panes>
+        <rows>[story2].[none:label:nk]</rows>
+        <cols>[story2].[sum:value:qk]</cols>
+      </table>
+    </worksheet>
+    <worksheet name="04 Largest declines 1987 to 2007">
+      <layout-options>
+        <title />
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption="04 Largest declines 1987 to 2007" name="story3" />
+          </datasources>
+          <datasource-dependencies datasource="story3">
+            <column caption="Country" datatype="string" name="[label]" role="dimension" type="nominal" />
+            <column caption="Change in years" datatype="real" name="[value]" role="measure" type="quantitative" />
+            <column-instance column="[label]" derivation="None" name="[none:label:nk]" pivot="key" type="nominal" />
+            <column-instance column="[value]" derivation="Sum" name="[sum:value:qk]" pivot="key" type="quantitative" />
+          </datasource-dependencies>
+          <aggregation value="true" />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option="selection-relaxation-allow">
+            <view breakdown="auto" />
+            <mark class="Bar" />
+          </pane>
+        </panes>
+        <rows>[story3].[none:label:nk]</rows>
+        <cols>[story3].[sum:value:qk]</cols>
+      </table>
+    </worksheet>
+  </worksheets>
+  <windows>
+    <window class="worksheet" name="01 Population above 70 years" />
+    <window class="worksheet" name="02 Median life expectancy" />
+    <window class="worksheet" name="03 Largest gains 1952 to 2007" />
+    <window class="worksheet" name="04 Largest declines 1987 to 2007" />
+  </windows>
+</workbook>

@@ -1,16 +1,26 @@
-# Global Health Convergence | A Tableau data story
+# Global Health Convergence
 
-A six-point Tableau story on the Gapminder dataset: global life expectancy
-converged dramatically (1% -> 61% of humanity in 70+ life-expectancy
-countries, 1952-2007), the biggest gains were middle-income fast-followers,
-and the convergence ran backwards through southern Africa during the
-HIV/AIDS epidemic.
+A reproducible Gapminder analysis and packaged Tableau workbook covering changes in life expectancy across 142 countries, 1952–2007.
 
-- `data/gapminder.csv` — 1,704 rows (via the gapminder Python package)
-- `docs/STORY_SPEC.md` — point-by-point build spec: LOD expressions,
-  threshold parameter, slope charts, pages animation, design rules
-- `docs/WRITEUP.md` — the analytical narrative with every quoted number
-  computed from the file
+## Delivered artifacts
 
-Build in Tableau Public per the spec; after publishing, add the URL and one
-screenshot per story point here.
+- [`GlobalHealth.twbx`](GlobalHealth.twbx): packaged workbook with four worksheets and relative CSV connections.
+- [`GlobalHealth.twb`](GlobalHealth.twb): inspectable XML source.
+- [`build_workbook.py`](build_workbook.py): reproduces population-weighted threshold shares, country gains/declines and the workbook.
+- [`outputs/evidence.json`](outputs/evidence.json): source observations, derived series, coverage and interpretation limits.
+
+Four tests pass: balanced panel and weighted denominator, threshold sensitivity, country-change calculation and packaged connection integrity. **Native Tableau rendering and publication have not been verified.** The six-point interactive Story, scatterplot/pages animation and threshold parameter described in `docs/STORY_SPEC.md` are remaining native enhancements; the delivered workbook has four analytical worksheets.
+
+## Reproduce
+
+```sh
+python -m pip install -r requirements.txt
+python build_workbook.py
+python -m pytest tests -q
+```
+
+Open `GlobalHealth.twbx` in Tableau Desktop/Public, validate all worksheets and publish from your own account. The packaged workbook embeds only public Gapminder-derived CSVs. A published Tableau Public URL has not been recorded.
+
+## Interpretation
+
+The share living in countries with life expectancy at least 70 rises from approximately 1.1% to 61.4%, **weighted by population within this panel**. It is not coverage of every country or every person worldwide. Median country life expectancy and population-weighted shares answer different questions. National averages conceal inequality; five-year observations miss short-term changes. GDP and health associations do not establish causes of the changes.
